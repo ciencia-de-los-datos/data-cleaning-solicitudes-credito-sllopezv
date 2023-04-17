@@ -5,9 +5,6 @@ def clean_data():
     df = pd.read_csv("solicitudes_credito.csv", sep=";")
     df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
     df.reset_index(inplace=True,drop=True)
-    
-    df.dropna(axis='index',inplace=True)
-    df.drop_duplicates(inplace=True)
 
     df['sexo'] = df['sexo'].str.lower().astype(str).str.strip()
     df['tipo_de_emprendimiento'] = df['tipo_de_emprendimiento'].str.lower().astype(str)
@@ -24,3 +21,5 @@ def clean_data():
     df.dropna(axis='index',inplace=True)
     
     return df
+
+print(clean_data().sexo.value_counts().to_list())
